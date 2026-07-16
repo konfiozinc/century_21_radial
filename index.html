@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-neutral-950 select-none">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#171717"/>
+    <title>Juliana Zapata A. | CENTURY 21 Radial - Tarjeta Digital</title>
+    
+    <!-- Tailwind CSS & Iconografía Oficial -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Wow Effect: Brillo perimetral elegante color arena metálico */
+        @keyframes goldGlow {
+            0%, 100% { border-color: rgba(198, 164, 63, 0.3); box-shadow: 0 0 12px rgba(198, 164, 63, 0.15); }
+            50% { border-color: rgba(198, 164, 63, 0.7); box-shadow: 0 0 20px rgba(198, 164, 63, 0.35); }
+        }
+        .wow-profile { animation: goldGlow 4s infinite ease-in-out; }
+        
+        /* Conversión: Pulso controlado para botón principal de WhatsApp */
+        @keyframes whatsappPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 20px -4px rgba(37, 211, 102, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 14px 25px -4px rgba(37, 211, 102, 0.6); }
+        }
+        .pulse-whatsapp { animation: whatsappPulse 2s infinite ease-in-out; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: #171717; border-radius: 28px; width: 100%; max-w: 326px; transform: scale(0.96); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); border: 1px solid rgba(198, 164, 63, 0.15); }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .app-container { height: 100vh; height: 100dvh; }
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #262626; color: #fff; padding: 8px 20px; border-radius: 999px; font-size: 13px; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 2000; border: 1px solid rgba(198, 164, 63, 0.15); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body class="bg-neutral-950 w-full flex justify-center items-center overflow-hidden">
+
+    <!-- 1. MODULO: SPLASH SCREEN -->
+    <div id="splash" class="fixed inset-0 bg-[#171717] flex flex-col items-center justify-center z-[9999] transition-opacity duration-400">
+        <div class="text-center animate-pulse">
+            <div class="w-20 h-20 mx-auto bg-neutral-900 rounded-full flex items-center justify-center shadow-2xl border-4 border-[#C6A43F] mb-3">
+                <i class="fas fa-house-chimney text-2xl text-[#C6A43F]"></i>
+            </div>
+            <h1 class="text-xl font-bold text-white tracking-widest uppercase">CENTURY 21</h1>
+            <p class="text-[#C6A43F] text-[9px] font-bold uppercase tracking-widest mt-0.5">Radial · Medellín</p>
+        </div>
+    </div>
+
+    <!-- CHASIS APP PREMIUM FIJA (MANDATORIO: SIN SCROLL DE FONDO) -->
+    <div class="app-container w-full max-w-[380px] bg-[#171717] relative flex flex-col justify-between overflow-hidden shadow-2xl border border-neutral-800">
+        
+        <!-- CONTENIDO INTERNO DE PANTALLA -->
+        <div class="flex-grow flex flex-col justify-between pb-28 overflow-y-auto">
+            
+            <!-- 2. MODULO: PORTADA & HERO (Fiel al diseño corporativo grafito/arena metalizado) -->
+            <header class="relative bg-gradient-to-b from-neutral-900 via-neutral-900 to-neutral-950 pt-7 pb-6 px-5 text-center text-white rounded-b-[40px] shadow-2xl flex-shrink-0 border-b border-neutral-800">
+                <div class="absolute top-3 right-4 bg-neutral-800 border border-neutral-700 text-[#C6A43F] font-bold px-2.5 py-0.5 rounded-full text-[8px] uppercase tracking-wider">
+                    Radial
+                </div>
+                
+                <h2 class="text-2xl font-bold text-white mt-2 tracking-tight">Juliana Zapata A.</h2>
+                <p class="text-[#C6A43F] font-semibold text-[10px] uppercase tracking-widest mt-0.5">Agente Inmobiliario Profesional</p>
+                
+                <!-- ZONA CENTRAL DE SEGURIDAD DEL LOGO "21" (VECTORIAL INLINE - EVITA DESBORDES) -->
+                <div class="w-24 h-24 mx-auto bg-neutral-900 rounded-full flex flex-col items-center justify-center border-2 wow-profile p-1 my-3 shadow-xl block relative">
+                    <svg class="w-14 h-14 text-[#C6A43F] -mt-1" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 5C24.1 5 3.1 25.1 3.1 50c0 4.1.6 8.1 1.6 11.9 1.1-2.1 2.6-4.1 4.5-5.6 3.1-2.5 7.1-3.9 11.3-3.9 4.9 0 9.4 1.9 12.8 5.2 2.1-4 5.3-7.2 9.2-9.2-3.1-3.4-5-8-5-13 0-10.5 8.1-19 18.2-19s18.2 8.5 18.2 19c0 4.4-1.5 8.4-4 11.6l15.1 19.3c.7-1.1 1.3-2.3 1.9-3.5 1.1-3.8 1.6-7.8 1.6-11.9C96.9 25.1 75.9 5 50 5zm13.7 20.3c4.7 0 8.5 4 8.5 9s-3.8 9-8.5 9-8.5-4-8.5-9 3.8-9 8.5-9z"/>
+                        <text x="44" y="75" font-family="'Inter', sans-serif" font-weight="900" font-size="34" fill="currentColor" tracking-tighter>21</text>
+                    </svg>
+                    <div class="absolute bottom-1.5 inset-x-0 text-center">
+                        <span class="text-[7px] text-white/60 uppercase font-bold tracking-widest">CENTURY 21</span>
+                    </div>
+                </div>
+                
+                <div class="bg-neutral-900/80 rounded-xl p-2 max-w-[240px] mx-auto shadow-inner border border-neutral-800">
+                    <span class="text-[9px] block text-[#C6A43F] font-bold uppercase tracking-widest"><i class="fas fa-building-circle-check mr-1"></i> Asesoría Inmobiliaria de Alta Gama</span>
+                </div>
+            </header>
+
+            <!-- CONTENIDO CENTRAL OPERATIVO -->
+            <div class="px-5 space-y-3.5 flex-grow flex flex-col justify-center mt-2">
+                
+                <!-- 3. MODULO: BOTONES RÁPIDOS / CTA DE ALTA CONVERSIÓN -->
+                <div class="fade-in-up">
+                    <a href="https://wa.me/573117700918?text=Hola%20Juliana%20Zapata,%20solicito%20asesor%C3%ADa%20inmobiliaria%20profesional%20sobre%20un%20inmueble." target="_blank" class="w-full flex items-center justify-center bg-[#25D366] text-white font-black py-3.5 px-4 rounded-xl text-center text-xs uppercase tracking-wider transition-transform transform active:scale-95 pulse-whatsapp">
+                        <i class="fab fa-whatsapp text-xl mr-2 text-white"></i>Contactar por WhatsApp
+                    </a>
+                </div>
+
+                <!-- 5. MODULO: SERVICIOS RESUMIDOS (GLASSMORPHISM CARDS) -->
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-neutral-900/50 border border-neutral-800 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-[#C6A43F]/10 rounded-lg flex items-center justify-center text-[#C6A43F] text-xs flex-shrink-0 shadow-inner"><i class="fas fa-key"></i></div>
+                        <span class="text-[10px] font-bold text-neutral-300 leading-tight">Venta & Corretaje</span>
+                    </div>
+                    <div class="bg-neutral-900/50 border border-neutral-800 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-[#C6A43F]/10 rounded-lg flex items-center justify-center text-[#C6A43F] text-xs flex-shrink-0 shadow-inner"><i class="fas fa-hand-holding-dollar"></i></div>
+                        <span class="text-[10px] font-bold text-neutral-300 leading-tight">Arriendos Premium</span>
+                    </div>
+                    <div class="bg-neutral-900/50 border border-neutral-800 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-[#C6A43F]/10 rounded-lg flex items-center justify-center text-[#C6A43F] text-xs flex-shrink-0 shadow-inner"><i class="fas fa-paste"></i></div>
+                        <span class="text-[10px] font-bold text-neutral-300 leading-tight">Avalúos & Aval</span>
+                    </div>
+                    <div class="bg-neutral-900/50 border border-neutral-800 p-2.5 rounded-xl flex items-center gap-2 shadow-sm">
+                        <div class="w-6 h-6 bg-[#C6A43F]/10 rounded-lg flex items-center justify-center text-[#C6A43F] text-xs flex-shrink-0 shadow-inner"><i class="fas fa-gavel"></i></div>
+                        <span class="text-[10px] font-bold text-neutral-300 leading-tight">Trámites Legales</span>
+                    </div>
+                </div>
+
+                <!-- ENLACES TELEFÓNICOS DIRECTOS NATIVOS -->
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="tel:+573117700918" class="bg-neutral-900 border border-neutral-800 py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 text-[10px] font-bold text-white transition-colors hover:bg-neutral-800">
+                        <i class="fas fa-phone text-[#C6A43F]"></i> Llamar Celular
+                    </a>
+                    <a href="tel:+5745898666" class="bg-neutral-900 border border-neutral-800 py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 text-[10px] font-bold text-white transition-colors hover:bg-neutral-800">
+                        <i class="fas fa-phone-alt text-[#C6A43F]"></i> Llamar Oficina
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 11. MODULO: CTA ACCIONES COMPLEMENTARIAS -->
+            <div class="px-5 mt-auto pt-2">
+                <button id="btn-vcard" class="w-full bg-neutral-800 hover:bg-neutral-700 text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-neutral-700 shadow-md">
+                    <i class="fas fa-address-card text-[#C6A43F]"></i> Guardar Contacto en Agenda
+                </button>
+            </div>
+        </div>
+
+        <!-- 4 y 12. MODULO: BARRA DE NAVEGACIÓN INFERIOR & PIE DE TARJETA CON TU MARCA -->
+        <div class="absolute bottom-0 inset-x-0 bg-neutral-950 border-t border-neutral-800 z-20 flex flex-col shadow-2xl">
+            <nav class="px-2 py-2.5 flex justify-around items-center">
+                <button id="nav-services" class="flex flex-col items-center justify-center text-neutral-500 hover:text-white w-12 transition-colors">
+                    <i class="fas fa-briefcase text-base"></i><span class="text-[9px] font-bold mt-1">Servicios</span>
+                </button>
+                <button id="nav-gallery" class="flex flex-col items-center justify-center text-neutral-500 hover:text-white w-12 transition-colors">
+                    <i class="fas fa-images text-base"></i><span class="text-[9px] font-bold mt-1">Evidencia</span>
+                </button>
+                <button id="nav-testimonials" class="flex flex-col items-center justify-center text-neutral-500 hover:text-white w-12 transition-colors">
+                    <i class="fas fa-star text-base"></i><span class="text-[9px] font-bold mt-1">Garantía</span>
+                </button>
+                <button id="nav-coverage" class="flex flex-col items-center justify-center text-neutral-500 hover:text-white w-12 transition-colors">
+                    <i class="fas fa-map-location-dot text-base"></i><span class="text-[9px] font-bold mt-1">Oficina</span>
+                </button>
+                <button id="nav-share" class="flex flex-col items-center justify-center text-neutral-500 hover:text-white w-12 transition-colors">
+                    <i class="fas fa-qrcode text-base"></i><span class="text-[9px] font-bold mt-1">QR</span>
+                </button>
+            </nav>
+            <!-- SELLO OFICIAL DE MARCA MANDATORIO V2.0 -->
+            <div class="text-center text-[8px] tracking-wider text-neutral-600 font-medium bg-neutral-950 pb-1.5 uppercase">
+                Creado por KONFÍO ZINC — Todos los derechos reservados
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ELEMENTOS EMERGENTES MODULARES ================= -->
+    
+    <!-- 5. SERVICIOS DETALLADOS -->
+    <div id="modal-services" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-neutral-900 text-[#C6A43F] p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-neutral-800">
+                <span><i class="fas fa-briefcase mr-2"></i>Portafolio de Servicios</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 max-h-[60vh] overflow-y-auto space-y-3.5 text-neutral-300">
+                <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
+                    <h4 class="font-bold text-[#C6A43F] text-xs uppercase">Venta & Corretaje Corporativo</h4>
+                    <p class="text-[11px] text-neutral-400 mt-1 leading-normal">Intermediación estratégica respaldada por el ecosistema global de Century 21 para la colocación de bienes residenciales y comerciales de alto valor.</p>
+                </div>
+                <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
+                    <h4 class="font-bold text-[#C6A43F] text-xs uppercase">Administración de Arriendos</h4>
+                    <p class="text-[11px] text-neutral-400 mt-1 leading-normal">Estrategia técnica para la gestión integral de arrendamientos con perfiles de clientes corporativos rigurosamente filtrados.</p>
+                </div>
+                <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
+                    <h4 class="font-bold text-[#C6A43F] text-xs uppercase">Consultoría & Avalúos Oficiales</h4>
+                    <p class="text-[11px] text-neutral-400 mt-1 leading-normal">Estudios comerciales y dictámenes periciales certeros ajustados a las realidades de mercado para la toma de decisiones financieras.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6 y 7. GALERÍA & VIDEOS -->
+    <div id="modal-gallery" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-neutral-900 text-[#C6A43F] p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-neutral-800">
+                <span><i class="fas fa-images mr-2"></i>Bienes & Evidencia</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3">
+                <div class="rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=400" alt="Inmueble de Lujo" class="w-full h-32 object-cover">
+                    <p class="text-[10px] p-2 text-neutral-400 text-center font-medium">Portafolio curado con propiedades residenciales exclusivas en las mejores zonas de Medellín.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. TESTIMONIOS -->
+    <div id="modal-testimonials" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-neutral-900 text-[#C6A43F] p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-neutral-800">
+                <span><i class="fas fa-star mr-2"></i>Garantía del Servicio</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3 text-neutral-300">
+                <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800">
+                    <h4 class="font-bold text-[#C6A43F] text-xs uppercase">Respaldo Global Century 21</h4>
+                    <p class="text-[11px] text-neutral-400 italic leading-relaxed mt-1">"Cada oficina es de propiedad y operación independiente". Garantizamos una experiencia comercial transparente, estructurada y blindada legalmente en cada fase del corretaje.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9 y 10. COBERTURA E INFORMACIÓN -->
+    <div id="modal-coverage" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-neutral-900 text-[#C6A43F] p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-neutral-800">
+                <span><i class="fas fa-map-location-dot mr-2"></i>Ubicación Corporativa</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-4 space-y-3 text-neutral-300 text-[11px]">
+                <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 flex items-start gap-2.5">
+                    <i class="fas fa-location-dot text-[#C6A43F] text-sm mt-0.5"></i>
+                    <div>
+                        <h5 class="font-bold text-neutral-200">Mall San Lucas</h5>
+                        <p class="text-[10px] text-neutral-400 mt-0.5 font-semibold">Cl. 20 Sur #27-55, Mall San Lucas - Int 1 y 2, Medellín, Colombia.</p>
+                    </div>
+                </div>
+                <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 space-y-1.5 font-medium">
+                    <div class="flex justify-between border-b border-neutral-800 pb-1"><span>Correo Corporativo:</span><span class="text-white font-bold lowercase">jzapata@century21radial.com</span></div>
+                    <div class="flex justify-between border-b border-neutral-800 pb-1"><span>Página Web:</span><span class="text-white font-bold lowercase">www.century21radial.com</span></div>
+                    <div class="flex justify-between"><span>Atención Operativa:</span><span class="text-emerald-500 font-bold">Lunes a Sábado</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR COMPARTIR -->
+    <div id="modal-qr" class="modal-overlay">
+        <div class="modal-content overflow-hidden shadow-2xl">
+            <div class="bg-neutral-900 text-[#C6A43F] p-4 font-bold text-xs uppercase tracking-wider flex justify-between items-center border-b border-neutral-800">
+                <span><i class="fas fa-qrcode mr-2"></i>Compartir Perfil</span>
+                <button class="close-modal text-lg font-bold px-2 text-white/80 hover:text-white">&times;</button>
+            </div>
+            <div class="p-5 text-center">
+                <div id="qrcode" class="flex justify-center p-2.5 bg-white border border-neutral-800 rounded-xl inline-block mx-auto shadow-sm"></div>
+                <p class="text-[10px] text-neutral-400 mt-3 px-1 leading-normal">Escanea este código desde otro celular para abrir al instante la Tarjeta Digital Profesional de Juliana Zapata.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Desvanecimiento controlado de la Splash Screen
+            setTimeout(() => {
+                const splash = document.getElementById('splash');
+                if(splash) {
+                    splash.style.opacity = '0';
+                    setTimeout(() => splash.style.display = 'none', 400);
+                }
+            }, 1000);
+
+            // Controlador modular de ventanas emergentes App
+            const setupAppModal = (triggerId, modalId) => {
+                const trigger = document.getElementById(triggerId);
+                const modal = document.getElementById(modalId);
+                if (!trigger || !modal) return;
+                
+                trigger.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('active'); });
+                modal.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
+                modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
+            };
+
+            // Captura automática de la URL de producción activa (GitHub Pages)
+            const urlReal = window.location.href;
+
+            // Inicializar disparadores de navegación de la barra inferior fija
+            setupAppModal('nav-services', 'modal-services');
+            setupAppModal('nav-gallery', 'modal-gallery');
+            setupAppModal('nav-testimonials', 'modal-testimonials');
+            setupAppModal('nav-coverage', 'modal-coverage');
+            setupAppModal('nav-share', 'modal-qr');
+
+            // Generador de QR dinámico alineado a la URL activa de producción
+            const qrBox = document.getElementById("qrcode");
+            if(qrBox) {
+                new QRCode(qrBox, {
+                    text: urlReal,
+                    width: 144,
+                    height: 144,
+                    colorDark : "#C6A43F",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            }
+
+            // Toast de Feedback
+            const toast = document.getElementById('toast');
+            const showToast = (msg) => { 
+                toast.textContent = msg; 
+                toast.classList.add('show'); 
+                setTimeout(() => toast.classList.remove('show'), 2200); 
+            };
+
+            // Descarga de vCard corporativa (.vcf)
+            const btnVcard = document.getElementById('btn-vcard');
+            if (btnVcard) {
+                btnVcard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Juliana Zapata A.\nORG:CENTURY 21 Radial\nTITLE:Agente Inmobiliario Profesional\nTEL;TYPE=CELL,VOICE;PREF=1:+573117700918\nTEL;TYPE=WORK,VOICE:+5745898666\nEMAIL:jzapata@century21radial.com\nADR;TYPE=WORK:;;Cl. 20 Sur #27-55 Mall San Lucas Int 1 y 2;Medellin;;;Colombia\nNOTE:Agente Century 21 Radial. Especialista en venta, arriendos y corretaje de inmuebles residenciales.\nURL:${urlReal}\nEND:VCARD`;
+                    const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'Juliana_Zapata_C21.vcf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    showToast('Tarjeta de contacto guardada en agenda');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
